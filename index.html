@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>アロマ香房　free &amp; free｜品川・大井町のリラクゼーションサロン</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Shippori+Mincho+B1:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ivory:       #f7f4ef;
+      --ivory-dark:  #ede8df;
+      --sumi:        #111110;
+      --sumi-mid:    #333330;
+      --sumi-light:  #666660;
+      --green:       #2c4a35;
+      --green-mid:   #4a7a5a;
+      --green-pale:  #e8f0ea;
+      --rose:        #9e5f5a;
+      --rose-pale:   #f2e8e7;
+      --gold:        #8a7250;
+      --hotpepper:   #9e5f5a;
+      --border:      #d8d0c4;
+    }
+
+    html { font-size: 18px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Shippori Mincho', 'Shippori Mincho B1', serif;
+      background: var(--ivory);
+      color: var(--sumi);
+      font-weight: 400;
+      line-height: 2.0;
+    }
+
+    /* ── FADE ── */
+    .fade { opacity: 0; transform: translateY(22px); transition: opacity 1s ease, transform 1s ease; }
+    .fade.in { opacity: 1; transform: none; }
+    .fade.d1 { transition-delay: 0.15s; }
+    .fade.d2 { transition-delay: 0.30s; }
+    .fade.d3 { transition-delay: 0.48s; }
+    .fade.d4 { transition-delay: 0.64s; }
+
+    /* ── HEADER ── */
+    #site-header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      background: rgba(247,244,239,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 clamp(14px, 3vw, 36px);
+    }
+    .header-inner {
+      max-width: 1180px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      height: 72px; gap: 24px;
+    }
+    .h-logo {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--green);
+      letter-spacing: 0.1em; text-decoration: none; white-space: nowrap; line-height: 1.3;
+    }
+    .h-logo span {
+      display: block; font-size: 0.6rem; font-weight: 400;
+      color: var(--sumi-light); letter-spacing: 0.22em;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    .h-nav { display: flex; gap: clamp(10px, 1.4vw, 20px); align-items: center; }
+    .h-nav a {
+      text-decoration: none; color: var(--sumi-mid);
+      font-size: 0.74rem; letter-spacing: 0.08em; white-space: nowrap; transition: color 0.2s;
+    }
+    .h-nav a:hover { color: var(--green); }
+    .h-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .h-tel {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem; color: var(--green); letter-spacing: 0.05em;
+      text-decoration: none; white-space: nowrap;
+      display: flex; flex-direction: column; align-items: flex-end;
+      transition: color 0.2s;
+    }
+    .h-tel:hover { color: var(--rose); }
+    .h-tel small { font-family: 'Shippori Mincho', serif; font-size: 0.56rem; color: var(--sumi-light); letter-spacing: 0.1em; }
+    .h-hotpepper-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 8px 10px; background: var(--hotpepper); color: white;
+      text-decoration: none; font-size: 0.64rem; letter-spacing: 0.05em;
+      border-radius: 2px; transition: opacity 0.2s; white-space: nowrap;
+    }
+    .h-hotpepper-btn:hover { opacity: 0.85; }
+
+    /* ── FLOAT BUTTONS ── */
+    .float-wrap {
+      position: fixed; right: 24px; bottom: 32px; z-index: 400;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .float-btn {
+      width: 54px; height: 54px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1.3rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .float-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .float-hotpepper { background: var(--hotpepper); }
+    .float-tel  { background: var(--green); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      background: url('フリフリトップ画像.png') center center / cover no-repeat;
+      padding: 100px 0 0;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10,20,14,0.72) 0%,
+        rgba(10,20,14,0.55) 50%,
+        rgba(10,20,14,0.25) 100%
+      );
+      pointer-events: none;
+    }
+    .hero-layout {
+      display: flex; align-items: center;
+      width: 100%; max-width: 800px; margin: 0 auto;
+      padding: 0 48px 120px; min-height: calc(100vh - 100px);
+    }
+    .hero-text { position: relative; z-index: 2; }
+    .hero-label {
+      display: inline-block; font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem; letter-spacing: 0.32em; color: rgba(255,255,255,0.95);
+      text-transform: uppercase; margin-bottom: 28px;
+      position: relative; padding-left: 36px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+    }
+    .hero-label::before {
+      content: ''; position: absolute; left: 0; top: 50%;
+      width: 28px; height: 1px; background: rgba(255,255,255,0.8);
+    }
+    .hero-catch {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: clamp(1.9rem, 4vw, 3.5rem); font-weight: 700;
+      line-height: 1.6; color: #fff; margin-bottom: 10px; letter-spacing: 0.05em;
+    }
+    .hero-catch em { display: block; font-style: normal; color: #fff; }
+    .hero-sub {
+      font-size: 0.88rem; color: rgba(255,255,255,0.7); letter-spacing: 0.18em; margin-bottom: 32px;
+    }
+    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 36px; background: var(--green); color: #fff;
+      text-decoration: none; font-size: 0.78rem; letter-spacing: 0.18em;
+      transition: background 0.25s;
+    }
+    .btn-primary:hover { background: var(--green-mid); }
+    .btn-hotpepper-hero {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; background: var(--hotpepper); color: #fff;
+      text-decoration: none; font-size: 0.78rem; letter-spacing: 0.15em;
+      transition: opacity 0.25s;
+    }
+    .btn-hotpepper-hero:hover { opacity: 0.85; }
+    .hero-visual { display: none; }
+    .hero-circle {
+      width: clamp(280px, 38vw, 480px); height: clamp(280px, 38vw, 480px);
+      border-radius: 50%; position: relative; overflow: hidden;
+      border: 1px solid rgba(44,74,53,0.15);
+    }
+    .hero-circle img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center;
+    }
+    .hero-circle-inner { display: none; }
+    .hero-scroll {
+      position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: 0.6rem; letter-spacing: 0.22em; color: var(--sumi-light); text-transform: uppercase;
+      pointer-events: none;
+    }
+    .hero-scroll::after {
+      content: ''; display: block; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--sumi-light), transparent);
+    }
+
+    /* ── SECTION BASE ── */
+    .section { padding: 100px 48px; }
+    .sec-inner { max-width: 1080px; margin: 0 auto; }
+    .sec-head { text-align: center; margin-bottom: 64px; }
+    .sec-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.68rem; letter-spacing: 0.38em; color: var(--gold);
+      text-transform: uppercase; display: block; margin-bottom: 16px;
+    }
+    .sec-rule {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      margin-bottom: 20px; color: var(--gold); font-size: 0.7rem;
+    }
+    .sec-rule::before, .sec-rule::after {
+      content: ''; width: 48px; height: 1px; background: var(--border);
+    }
+    .sec-title {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 700;
+      color: var(--sumi); letter-spacing: 0.08em; line-height: 1.6;
+    }
+    .sec-lead {
+      margin-top: 16px; font-size: 0.9rem; color: var(--sumi-light); line-height: 2.1;
+    }
+
+    /* ── CONCEPT ── */
+    .concept { background: var(--ivory-dark); }
+    .concept-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .concept-text p { font-size: 0.93rem; color: var(--sumi-mid); line-height: 2.3; margin-bottom: 20px; }
+    .concept-quote {
+      border-left: 3px solid var(--green); padding: 16px 24px;
+      margin: 28px 0; background: rgba(44,74,53,0.04);
+    }
+    .concept-quote p { font-size: 0.88rem; color: var(--green); line-height: 1.9; font-style: italic; margin: 0; }
+    .merit-list { display: flex; flex-direction: column; gap: 28px; }
+    .merit-item { display: flex; gap: 20px; align-items: flex-start; }
+    .merit-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; color: var(--gold); opacity: 0.5;
+      line-height: 1; flex-shrink: 0; width: 36px;
+    }
+    .merit-text h4 {
+      font-size: 0.95rem; font-weight: 700; color: var(--sumi); margin-bottom: 6px;
+    }
+    .merit-text p { font-size: 0.85rem; color: var(--sumi-light); line-height: 2; }
+
+    /* ── AROMA BANNER ── */
+    .aroma-banner {
+      background: linear-gradient(135deg, #182b20 0%, #2c4a35 50%, #1e3828 100%);
+      padding: 80px 48px; text-align: center; position: relative; overflow: hidden;
+    }
+    .aroma-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 400px 300px at 10% 25%, rgba(138,114,80,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 350px 400px at 88% 75%, rgba(232,240,234,0.07) 0%, transparent 70%),
+        repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.008) 40px, rgba(255,255,255,0.008) 41px);
+      pointer-events: none;
+    }
+    .aroma-banner-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+    .aroma-banner-head { margin-bottom: 56px; }
+    .aroma-banner .banner-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.7rem; letter-spacing: 0.38em; color: rgba(138,114,80,0.9);
+      text-transform: uppercase; display: block; margin-bottom: 20px;
+    }
+    .aroma-num-wrap {
+      display: flex; align-items: baseline; justify-content: center; gap: 8px; margin-bottom: 16px;
+    }
+    .aroma-banner .banner-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 10vw, 7rem); font-weight: 300;
+      color: rgba(255,255,255,0.9); line-height: 1; letter-spacing: 0.02em;
+    }
+    .banner-num-label {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1rem; color: rgba(255,255,255,0.45); letter-spacing: 0.2em;
+    }
+    .aroma-banner .banner-text {
+      font-size: 0.88rem; color: rgba(255,255,255,0.6); letter-spacing: 0.15em; line-height: 2;
+    }
+    .aroma-categories {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px; text-align: left;
+    }
+    .aroma-cat-label {
+      display: block; font-family: 'Cormorant Garamond', serif;
+      font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(138,114,80,0.9); margin-bottom: 14px;
+      padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .aroma-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .aroma-tags span {
+      font-size: 0.74rem; color: rgba(255,255,255,0.7);
+      letter-spacing: 0.06em; padding: 3px 10px;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 20px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .aroma-tags span:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .aroma-more {
+      margin-top: 32px; font-size: 0.78rem; color: rgba(255,255,255,0.45);
+      letter-spacing: 0.2em; text-align: center;
+    }
+
+    /* ── SERVICE / TOOLS ── */
+    .service { background: var(--ivory); }
+    .service-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px;
+    }
+    .scard {
+      position: relative; overflow: hidden; min-height: 420px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .scard-bg {
+      position: absolute; inset: 0; z-index: 0;
+      transition: transform 0.6s ease;
+    }
+    .scard:hover .scard-bg { transform: scale(1.06); }
+    .scard-kassa    .scard-bg { background: linear-gradient(160deg, #5c4a38 0%, #8a6e52 50%, #b89870 100%); }
+    .scard-cupping  .scard-bg { background: linear-gradient(160deg, #3d1f2a 0%, #6b3a4a 50%, #9e5f70 100%); }
+    .scard-brush    .scard-bg { background: linear-gradient(160deg, #5e4d30 0%, #9e8060 50%, #c4a87a 100%); }
+    .scard-cavitation .scard-bg { background: linear-gradient(160deg, #1a3545 0%, #2a5a6e 50%, #3a8090 100%); }
+    .scard-salt     .scard-bg { background: linear-gradient(160deg, #6a6560 0%, #a8a49c 50%, #d4cdc4 100%); }
+    .scard-yomogi   .scard-bg { background: linear-gradient(160deg, #182b1e 0%, #2c4a35 50%, #3d6245 100%); }
+    .scard-visual {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 44%;
+      display: flex; align-items: center; justify-content: center; z-index: 1;
+    }
+    .scard-visual svg { width: 90px; height: 90px; }
+    .scard-visual svg path, .scard-visual svg line,
+    .scard-visual svg rect, .scard-visual svg circle, .scard-visual svg ellipse {
+      stroke: rgba(255,255,255,0.55) !important; fill: none !important;
+    }
+    .scard-body {
+      position: relative; z-index: 2; padding: 28px 32px 36px;
+      background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.42) 60%, transparent 100%);
+    }
+    .scard-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.65rem; letter-spacing: 0.28em; color: rgba(255,255,255,0.45);
+      text-transform: uppercase; display: block; margin-bottom: 8px;
+    }
+    .scard-name {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1.1rem; font-weight: 700; color: #fff;
+      margin-bottom: 10px; letter-spacing: 0.08em;
+    }
+    .scard-rule {
+      width: 24px; height: 1px; background: rgba(255,255,255,0.3); margin-bottom: 12px;
+    }
+    .scard-desc { font-size: 0.82rem; color: rgba(255,255,255,0.8); line-height: 2.1; }
+
+    /* ── MENU ── */
+    .menu-sec { background: var(--ivory-dark); }
+    .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2px; }
+    .mcard {
+      background: var(--ivory); padding: 52px 44px;
+      border-top: 3px solid transparent; transition: border-color 0.3s; position: relative;
+    }
+    .mcard.featured { border-color: var(--green); }
+    .mcard-badge {
+      position: absolute; top: 20px; right: 20px;
+      background: var(--green); color: white;
+      font-size: 0.6rem; letter-spacing: 0.15em; padding: 4px 12px;
+    }
+    .mcard-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem; color: var(--border); line-height: 1; margin-bottom: 20px;
+    }
+    .mcard-name {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 1rem; font-weight: 700; color: var(--sumi);
+      margin-bottom: 12px; line-height: 1.7; letter-spacing: 0.06em;
+    }
+    .mcard-effects { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+    .effect-tag {
+      font-size: 0.65rem; padding: 2px 10px;
+      background: var(--green-pale); color: var(--green); border-radius: 20px;
+    }
+    .mcard-desc { font-size: 0.82rem; color: var(--sumi-light); line-height: 2.1; }
+    .mcard-price {
+      display: block; margin-top: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem; color: var(--gold); letter-spacing: 0.05em;
+    }
+    .mcard-price small { font-size: 0.7rem; color: var(--sumi-light); }
+    .mcard-first {
+      display: inline-block; margin-top: 10px;
+      font-size: 0.72rem; color: var(--green-mid); letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--green-mid); padding-bottom: 2px;
+    }
+    .mcard-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .mcard-tag {
+      font-size: 0.68rem; padding: 3px 10px;
+      border: 1px solid var(--border); color: var(--sumi-light); border-radius: 20px;
+    }
+
+    /* ── OWNER ── */
+    .owner-sec { background: var(--ivory); }
+    .owner-grid { display: grid; grid-template-columns: 280px 1fr; gap: 72px; align-items: center; }
+    .owner-photo {
+      width: 100%; aspect-ratio: 3/4; overflow: hidden; border-radius: 2px;
+      border: 1px solid var(--border);
+    }
+    .owner-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .owner-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.68rem; letter-spacing: 0.35em; color: var(--gold);
+      text-transform: uppercase; display: block; margin-bottom: 16px;
+    }
+    .owner-title {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 700;
+      color: var(--sumi); letter-spacing: 0.08em; line-height: 1.6; margin-bottom: 8px;
+    }
+    .owner-role {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem; letter-spacing: 0.22em; color: var(--sumi-light);
+      margin-bottom: 28px;
+    }
+    .owner-text p {
+      font-size: 0.9rem; color: var(--sumi-mid); line-height: 2.3; margin-bottom: 16px;
+    }
+
+    /* ── VOICE ── */
+    .voice-sec { background: var(--ivory-dark); }
+    .voice-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .vcard {
+      background: var(--ivory); padding: 40px 36px;
+      border-top: 2px solid var(--green-mid); position: relative;
+    }
+    .vcard::before {
+      content: '\201C';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6rem; line-height: 1; color: var(--green);
+      opacity: 0.08; position: absolute; top: 8px; left: 20px;
+    }
+    .vcard-text { font-size: 0.88rem; color: var(--sumi-mid); line-height: 2.2; position: relative; z-index: 1; }
+    .vcard-meta {
+      margin-top: 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .vcard-stars { color: #C8A96A; letter-spacing: -2px; font-size: 0.85rem; }
+    .vcard-who { font-size: 0.72rem; color: var(--sumi-light); letter-spacing: 0.08em; }
+    .vcard-menu {
+      margin-top: 8px; font-size: 0.68rem; color: var(--green-mid);
+      letter-spacing: 0.06em; padding: 3px 10px;
+      background: var(--green-pale); display: inline-block; border-radius: 2px;
+    }
+
+    /* ── FAQ ── */
+    .faq-sec { background: var(--ivory); }
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 28px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      display: flex; gap: 16px; align-items: flex-start;
+      font-size: 0.92rem; color: var(--sumi); cursor: default;
+    }
+    .faq-q-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; color: var(--green); flex-shrink: 0; line-height: 1.5; font-style: italic;
+    }
+    .faq-a { display: flex; gap: 16px; align-items: flex-start; margin-top: 14px; }
+    .faq-a-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; color: var(--gold); flex-shrink: 0; line-height: 1.5; font-style: italic;
+    }
+    .faq-a p { font-size: 0.86rem; color: var(--sumi-light); line-height: 2.1; }
+
+    /* ── RESERVE ── */
+    .reserve-sec { background: var(--green); padding: 100px 48px; text-align: center; }
+    .reserve-sec .sec-label { color: rgba(255,255,255,0.5); }
+    .reserve-sec .sec-title { color: #fff; }
+    .reserve-sec .sec-lead { color: rgba(255,255,255,0.7); }
+    .reserve-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+    .reserve-btn-tel {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 40px; border: 1px solid rgba(255,255,255,0.5);
+      color: #fff; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.18em;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .reserve-btn-tel:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
+    .reserve-tel-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem; color: #fff; letter-spacing: 0.06em; display: block; margin: 12px 0 4px;
+    }
+    .reserve-tel-note { font-size: 0.7rem; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; }
+    .reserve-btn-hotpepper {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 40px; background: var(--hotpepper);
+      color: #fff; text-decoration: none; font-size: 0.8rem; letter-spacing: 0.18em;
+      transition: opacity 0.25s;
+    }
+    .reserve-btn-hotpepper:hover { opacity: 0.88; }
+    .reserve-hotpepper {
+      margin-top: 24px; font-size: 0.8rem; color: rgba(255,255,255,0.6); letter-spacing: 0.1em;
+    }
+    .reserve-hotpepper a { color: rgba(255,255,255,0.85); }
+
+    /* ── INFO ── */
+    .info-sec { background: var(--ivory-dark); }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .info-block { margin-bottom: 40px; }
+    .info-block:last-child { margin-bottom: 0; }
+    .info-block h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .info-block address { font-size: 0.88rem; color: var(--sumi-mid); line-height: 2.1; font-style: normal; }
+    .info-block a { color: var(--green); text-decoration: none; }
+    .info-table { width: 100%; border-collapse: collapse; }
+    .info-table tr { border-bottom: 1px solid var(--border); }
+    .info-table td { padding: 13px 0; font-size: 0.84rem; }
+    .info-table td:first-child { color: var(--sumi-light); width: 88px; font-size: 0.74rem; letter-spacing: 0.1em; }
+    .map-ph {
+      height: 280px; background: #e4dfd6; border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+      color: var(--sumi-light); font-size: 0.8rem; letter-spacing: 0.1em;
+    }
+    .map-ph .map-icon { font-size: 2rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 52px 48px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px; background: var(--ivory);
+    }
+    .footer-logo {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: 0.95rem; font-weight: 700; color: var(--green); letter-spacing: 0.1em;
+    }
+    .footer-nav { display: flex; gap: 24px; list-style: none; }
+    .footer-nav a { font-size: 0.72rem; color: var(--sumi-light); text-decoration: none; letter-spacing: 0.1em; }
+    .footer-copy { font-size: 0.68rem; color: var(--sumi-light); letter-spacing: 0.08em; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      #site-header { padding: 0 20px; }
+      .h-nav { display: none; }
+    }
+    @media (max-width: 900px) {
+      .section, .reserve-sec, .info-sec { padding: 70px 24px; }
+      .hero-layout { grid-template-columns: 1fr; padding: 0 24px; }
+      .hero-visual { display: none; }
+      .hero-scroll { display: none; }
+      .concept-grid, .info-grid, .owner-grid { grid-template-columns: 1fr; gap: 40px; }
+      .service-grid { grid-template-columns: 1fr 1fr; }
+      .hero-ctas { flex-direction: column; }
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-nav { display: none; }
+    }
+    @media (max-width: 560px) {
+      .service-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header id="site-header">
+  <div class="header-inner">
+    <a href="#top" class="h-logo">
+      アロマ香房　free &amp; free
+      <span>Relaxation Salon · Shinagawa Oi</span>
+    </a>
+    <nav class="h-nav">
+      <a href="#concept">コンセプト</a>
+      <a href="#service">施術アイテム</a>
+      <a href="#menu">メニュー</a>
+      <a href="#owner">オーナー</a>
+      <a href="#voice">お客様の声</a>
+      <a href="#faq">よくある質問</a>
+      <a href="#info">アクセス</a>
+    </nav>
+    <div class="h-right">
+      <a href="tel:0364297463" class="h-tel">
+        03-6429-7463
+        <small>電話受付 12:00〜20:00</small>
+      </a>
+      <a href="https://beauty.hotpepper.jp/kr/slnH000255250/" target="_blank" class="h-hotpepper-btn">📅 ホットペッパー予約</a>
+    </div>
+  </div>
+</header>
+
+<!-- ── FLOAT ── -->
+<div class="float-wrap">
+  <a href="https://beauty.hotpepper.jp/kr/slnH000255250/" target="_blank" class="float-btn float-hotpepper" title="ホットペッパーで予約">📅</a>
+  <a href="tel:0364297463" class="float-btn float-tel" title="電話予約">📞</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top">
+  <div class="hero-layout">
+    <div class="hero-text">
+      <p class="hero-label fade">Aroma &amp; Relaxation Salon · 品川・大井町</p>
+      <h1 class="hero-catch fade d1">
+        日常を忘れて、<br>
+        <em>深く癒される。</em>
+      </h1>
+      <p class="hero-sub fade d2">アロマ香房　free &amp; free</p>
+      <div class="hero-ctas fade d3">
+        <a href="tel:0364297463" class="btn-primary">📞 電話で予約する</a>
+        <a href="https://beauty.hotpepper.jp/kr/slnH000255250/" target="_blank" class="btn-hotpepper-hero">📅 ホットペッパーで予約する</a>
+      </div>
+    </div>
+    <div class="hero-visual fade d2">
+      <div class="hero-circle">
+        <img src="フリフリトップ画像.png" alt="アロマ香房 free &amp; free">
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ── CONCEPT ── -->
+<section class="section concept" id="concept">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-label fade">コンセプト</span>
+      <div class="sec-rule fade d1"><span>◆</span></div>
+      <h2 class="sec-title fade d2">あなたの「おつかれ」に<br>寄り添う、香りと施術を。</h2>
+    </div>
+    <div class="concept-grid">
+      <div class="concept-text">
+        <p class="fade">
+          アロマ香房 free &amp; free は、品川・大井町の静かな空間で、
+          日常の忙しさを忘れてゆっくりと深く癒されていただくために生まれました。
+        </p>
+        <p class="fade d1">
+          80種類ものアロマオイルから、その日のあなたに寄り添う香りをセレクト。
+          オイルトリートメントとこだわりのマッサージ道具によって、
+          施術後の爽快感を多くのお客様にご実感いただいています。
+        </p>
+        <div class="concept-quote fade d2">
+          <p>「当店の良さを知ってしまったら、他のお店では満足できなくなるかもしれません」</p>
+        </div>
+      </div>
+      <div class="merit-list">
+        <div class="merit-item fade d1">
+          <span class="merit-num">01</span>
+          <div class="merit-text">
+            <h4>80種類のアロマオイル</h4>
+            <p>その日のお悩みや気分に合わせてブレンドする、オーダーメイドの香り体験。</p>
+          </div>
+        </div>
+        <div class="merit-item fade d2">
+          <span class="merit-num">02</span>
+          <div class="merit-text">
+            <h4>こだわりの施術道具</h4>
+            <p>かっさ・カッピング・ブラシ・キャビテーション・ソルト・よもぎ蒸しなど、充実のアイテムで全身を整えます。</p>
+          </div>
+        </div>
+        <div class="merit-item fade d3">
+          <span class="merit-num">03</span>
+          <div class="merit-text">
+            <h4>施術後の圧倒的な爽快感</h4>
+            <p>お客様一人ひとりのお悩みに合わせた施術方針で、確かな変化をご実感いただけます。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AROMA BANNER ── -->
+<div class="aroma-banner">
+  <div class="aroma-banner-inner">
+    <div class="aroma-banner-head fade">
+      <span class="banner-label">Aroma Oil Selection</span>
+      <div class="aroma-num-wrap">
+        <span class="banner-num">80</span>
+        <span class="banner-num-label">種類</span>
+      </div>
+      <p class="banner-text">その日の「おつかれ」に合う香りを、80種類のアロマオイルからブレンドします</p>
+    </div>
+    <div class="aroma-categories fade d1">
+      <div class="aroma-cat">
+        <span class="aroma-cat-label">Relax</span>
+        <div class="aroma-tags">
+          <span>ラベンダー</span><span>フランキンセンス</span>
+          <span>カモミール</span><span>イランイラン</span>
+        </div>
+      </div>
+      <div class="aroma-cat">
+        <span class="aroma-cat-label">Refresh</span>
+        <div class="aroma-tags">
+          <span>ペパーミント</span><span>ユーカリ</span><span>レモン</span>
+          <span>グレープフルーツ</span><span>ベルガモット</span><span>ライム</span><span>オレンジスイート</span>
+        </div>
+      </div>
+      <div class="aroma-cat">
+        <span class="aroma-cat-label">Floral</span>
+        <div class="aroma-tags">
+          <span>ローズ</span><span>ジャスミン</span><span>ネロリ</span>
+          <span>ゼラニウム</span><span>クラリセージ</span><span>ローズウッド</span>
+        </div>
+      </div>
+      <div class="aroma-cat">
+        <span class="aroma-cat-label">Woody · Earthy</span>
+        <div class="aroma-tags">
+          <span>シダーウッド</span><span>サイプレス</span><span>ジュニパー</span>
+        </div>
+      </div>
+      <div class="aroma-cat">
+        <span class="aroma-cat-label">Herb · Spice</span>
+        <div class="aroma-tags">
+          <span>ローズマリー</span><span>マジョラム</span><span>フェンネル</span><span>ブラックペッパー</span>
+        </div>
+      </div>
+    </div>
+    <p class="aroma-more fade d2">他にも種類を取り揃えてございます</p>
+  </div>
+</div>
+
+<!-- ── SERVICE / TOOLS ── -->
+<section class="section service" id="service">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-label fade">施術アイテム</span>
+      <div class="sec-rule fade d1"><span>◆</span></div>
+      <h2 class="sec-title fade d2">こだわりの施術アイテム</h2>
+      <p class="sec-lead fade d3">他店にはない充実のラインナップで、全身のお悩みに多角的にアプローチします。</p>
+    </div>
+    <div class="service-grid">
+
+      <!-- かっさ -->
+      <div class="scard scard-kassa fade d1">
+        <div class="scard-bg"></div>
+        <div class="scard-visual">
+          <svg width="90" height="90" viewBox="0 0 36 36" fill="none">
+            <path d="M10 8 Q18 4 26 8 L28 26 Q18 30 8 26 Z" stroke-width="1.5"/>
+            <line x1="18" y1="8" x2="18" y2="26" stroke-width="1" opacity="0.6"/>
+            <line x1="10" y1="14" x2="26" y2="14" stroke-width="0.8" opacity="0.4"/>
+            <line x1="9" y1="20" x2="27" y2="20" stroke-width="0.8" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <span class="scard-num">Tool 01</span>
+          <p class="scard-name">かっさ</p>
+          <div class="scard-rule"></div>
+          <p class="scard-desc">天然素材のかっさプレートで筋肉をほぐし、血流とリンパの流れを促進。肌のくすみやコリに効果的に働きかけます。</p>
+        </div>
+      </div>
+
+      <!-- カッピング -->
+      <div class="scard scard-cupping fade d2">
+        <div class="scard-bg"></div>
+        <div class="scard-visual">
+          <svg width="90" height="90" viewBox="0 0 36 36" fill="none">
+            <path d="M10 20 Q10 10 18 10 Q26 10 26 20 L24 28 Q18 30 12 28 Z" stroke-width="1.5"/>
+            <path d="M14 20 Q18 15 22 20" stroke-width="1" opacity="0.6"/>
+            <path d="M12 18 Q18 12 24 18" stroke-width="0.8" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <span class="scard-num">Tool 02</span>
+          <p class="scard-name">カッピング</p>
+          <div class="scard-rule"></div>
+          <p class="scard-desc">吸引カップで皮膚を引き上げ、深部の血行を促進。肩こり・腰痛・むくみなど、様々なお悩みにアプローチします。</p>
+        </div>
+      </div>
+
+      <!-- ブラシ -->
+      <div class="scard scard-brush fade d3">
+        <div class="scard-bg"></div>
+        <div class="scard-visual">
+          <svg width="90" height="90" viewBox="0 0 36 36" fill="none">
+            <rect x="12" y="6" width="12" height="16" rx="2" stroke-width="1.5"/>
+            <line x1="14" y1="22" x2="14" y2="30" stroke-width="1.2"/>
+            <line x1="17" y1="22" x2="17" y2="30" stroke-width="1.2"/>
+            <line x1="20" y1="22" x2="20" y2="30" stroke-width="1.2"/>
+            <line x1="23" y1="22" x2="23" y2="30" stroke-width="1.2"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <span class="scard-num">Tool 03</span>
+          <p class="scard-name">ブラシ</p>
+          <div class="scard-rule"></div>
+          <p class="scard-desc">専用ブラシによるドライブラッシングで老廃物の排出とデトックスを促進。全身の肌をなめらかに整えます。</p>
+        </div>
+      </div>
+
+      <!-- キャビテーション -->
+      <div class="scard scard-cavitation fade d1">
+        <div class="scard-bg"></div>
+        <div class="scard-visual">
+          <svg width="90" height="90" viewBox="0 0 36 36" fill="none">
+            <circle cx="18" cy="18" r="12" stroke-width="1.5"/>
+            <circle cx="18" cy="18" r="7" stroke-width="1" opacity="0.6"/>
+            <circle cx="18" cy="18" r="3" stroke-width="0.8" opacity="0.4"/>
+            <line x1="18" y1="4" x2="18" y2="8" stroke-width="1" opacity="0.5"/>
+            <line x1="18" y1="28" x2="18" y2="32" stroke-width="1" opacity="0.5"/>
+            <line x1="4" y1="18" x2="8" y2="18" stroke-width="1" opacity="0.5"/>
+            <line x1="28" y1="18" x2="32" y2="18" stroke-width="1" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <span class="scard-num">Tool 04</span>
+          <p class="scard-name">キャビテーション</p>
+          <div class="scard-rule"></div>
+          <p class="scard-desc">超音波の振動で脂肪細胞に働きかける最新機器。気になる部位の集中ケアに。ノンサージカルで安心してお受けいただけます。</p>
+        </div>
+      </div>
+
+      <!-- ソルト -->
+      <div class="scard scard-salt fade d2">
+        <div class="scard-bg"></div>
+        <div class="scard-visual">
+          <svg width="90" height="90" viewBox="0 0 36 36" fill="none">
+            <ellipse cx="18" cy="22" rx="10" ry="6" stroke-width="1.5"/>
+            <path d="M8 22 Q8 12 18 10 Q28 12 28 22" stroke-width="1.5"/>
+            <circle cx="14" cy="16" r="1.2" stroke-width="0.8" opacity="0.6"/>
+            <circle cx="18" cy="14" r="1.2" stroke-width="0.8" opacity="0.6"/>
+            <circle cx="22" cy="16" r="1.2" stroke-width="0.8" opacity="0.6"/>
+            <circle cx="16" cy="19" r="0.8" stroke-width="0.8" opacity="0.4"/>
+            <circle cx="20" cy="19" r="0.8" stroke-width="0.8" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <span class="scard-num">Tool 05</span>
+          <p class="scard-name">ソルト</p>
+          <div class="scard-rule"></div>
+          <p class="scard-desc">天然塩を使ったスクラブケア。古い角質を優しく除去しながら、ミネラルを補給して肌のうるおいと輝きを引き出します。</p>
+        </div>
+      </div>
+
+      <!-- よもぎ蒸し -->
+      <div class="scard scard-yomogi fade d3">
+        <div class="scard-bg"></div>
+        <div class="scard-visual">
+          <svg width="90" height="90" viewBox="0 0 36 36" fill="none">
+            <path d="M18 28 Q10 20 12 12 Q14 6 18 8 Q22 6 24 12 Q26 20 18 28Z" stroke-width="1.5"/>
+            <path d="M18 28 L18 33" stroke-width="1.5"/>
+            <path d="M13 25 Q10 29 8 32" stroke-width="1" opacity="0.5"/>
+            <path d="M23 25 Q26 29 28 32" stroke-width="1" opacity="0.5"/>
+            <path d="M15 16 Q18 12 21 16" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="scard-body">
+          <span class="scard-num">Tool 06</span>
+          <p class="scard-name">よもぎ蒸し</p>
+          <div class="scard-rule"></div>
+          <p class="scard-desc">よもぎのスチームを全身に浴びる温熱療法。発汗・デトックス・冷え改善に優れた効果を発揮します。心も体もあたたかく整えます。</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── MENU ── -->
+<section class="section menu-sec" id="menu">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-label fade">メニュー ＆ 料金</span>
+      <div class="sec-rule fade d1"><span>◆</span></div>
+      <h2 class="sec-title fade d2">メニュー・料金</h2>
+    </div>
+    <div class="menu-grid">
+
+      <!-- 01 新規限定 -->
+      <div class="mcard featured fade d1">
+        <span class="mcard-badge">新規限定</span>
+        <div class="mcard-num">01</div>
+        <p class="mcard-name">全身オイルトリートメント<br>85分＋特別ケア10分</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">深部から疲労解消</span>
+          <span class="effect-tag">刺激が苦手な方に</span>
+        </div>
+        <p class="mcard-desc">全身オイル85分＋道具ケア10分の贅沢な95分。お悩み箇所に合わせて道具を使いアプローチ。刺激が苦手な方にこそおすすめです。</p>
+        <span class="mcard-price">¥9,000 <small>/ 95 min</small></span>
+        <span class="mcard-first">新規・男女OK</span>
+      </div>
+
+      <!-- 02 リモート対策 -->
+      <div class="mcard fade d2">
+        <div class="mcard-num">02</div>
+        <p class="mcard-name">フェイシャル＋頭皮マッサージ<br>リモート対策コース</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">目・肩・首の疲れに</span>
+          <span class="effect-tag">眼精疲労に</span>
+        </div>
+        <p class="mcard-desc">クレンジングからピーリング・パック・デコルテ・フェイシャルマッサージ・頭皮までオールハンドで丁寧に施術。リモートワーク・在宅勤務の疲れに。</p>
+        <span class="mcard-price">¥5,600 <small>/ 50 min</small></span>
+        <span class="mcard-first">男女OK</span>
+      </div>
+
+      <!-- 03 香選アロマ -->
+      <div class="mcard fade d3">
+        <div class="mcard-num">03</div>
+        <p class="mcard-name">香選アロマ<br>全身アロマケア</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">むくみに</span>
+          <span class="effect-tag">気分転換に</span>
+        </div>
+        <p class="mcard-desc">80種類以上のアロマから香りを選ぶ全身ケア。背面（足〜腰〜背中〜肩）から仰向けでデコルテ・ヘッドまで丁寧に。</p>
+        <span class="mcard-price">¥5,800 <small>/ 60 min</small></span>
+        <span class="mcard-first">2回目以降・女性限定</span>
+      </div>
+
+      <!-- 04 男性限定 -->
+      <div class="mcard fade d1">
+        <span class="mcard-badge" style="background:var(--sumi-mid)">男性限定</span>
+        <div class="mcard-num">04</div>
+        <p class="mcard-name">アロマオールハンド<br>疲労解消コース</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">肩こりに</span>
+          <span class="effect-tag">眼精疲労に</span>
+        </div>
+        <p class="mcard-desc">足先からの全身アロマで蓄積された疲労を解消。しつこい首・肩こり、PC・スマホによる眼精疲労にも効果的。</p>
+        <span class="mcard-price">¥7,300 <small>/ 70 min</small></span>
+        <span class="mcard-first">通常 ¥8,500 → 特別価格</span>
+      </div>
+
+      <!-- 05 至福のリンパ -->
+      <div class="mcard fade d2">
+        <div class="mcard-num">05</div>
+        <p class="mcard-name">至福のリンパ流し<br>整体＋オイルトリートメント</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">むくみに</span>
+          <span class="effect-tag">しつこいコリに</span>
+        </div>
+        <p class="mcard-desc">整体30分でしつこいコリをほぐし、オイル60分で全身を流す90分コース。整体後は刺激も優しく、心地よい時間を過ごせます。</p>
+        <span class="mcard-price">¥9,300 <small>/ 90 min</small></span>
+        <span class="mcard-first">男女OK・何度でも</span>
+      </div>
+
+      <!-- 06 迷ったらコレ -->
+      <div class="mcard fade d3">
+        <span class="mcard-badge">おすすめ</span>
+        <div class="mcard-num">06</div>
+        <p class="mcard-name">全身ケア<br>ボディ＆小顔オールハンドマッサージ</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">全身ケアに</span>
+          <span class="effect-tag">ご褒美に</span>
+        </div>
+        <p class="mcard-desc">ボディもフェイシャルもオールハンドで贅沢な全身トリートメント。背面・フェイシャル・デコルテ・ヘッドまで丁寧に施術します。</p>
+        <span class="mcard-price">¥10,000 <small>/ 100 min</small></span>
+        <span class="mcard-first">全員OK ※男性2回目以降 +¥1,000</span>
+      </div>
+
+      <!-- 07 よもぎ蒸し -->
+      <div class="mcard fade d1">
+        <div class="mcard-num">07</div>
+        <p class="mcard-name">巡り整えデトックス<br>黄土よもぎ蒸し＋全身アロマ</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">冷えに</span>
+          <span class="effect-tag">デトックスに</span>
+          <span class="effect-tag">女性の不調に</span>
+        </div>
+        <p class="mcard-desc">黄土よもぎ蒸し40分で身体の芯からじんわり温め、緩んだ身体をアロマオイルで脚〜背中〜デコルテ〜首〜頭へ丁寧に施術。女性の不調にそっと寄り添います。</p>
+        <span class="mcard-price">¥9,600 <small>/ 100 min</small></span>
+        <span class="mcard-first">女性・何度でも</span>
+      </div>
+
+      <!-- 08 わがまま -->
+      <div class="mcard fade d2">
+        <span class="mcard-badge">人気 No.1</span>
+        <div class="mcard-num">08</div>
+        <p class="mcard-name">わがまま叶えます<br>組み合わせ自由 スペシャルコース</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">全身ケアに</span>
+          <span class="effect-tag">お好みに合わせて</span>
+        </div>
+        <p class="mcard-desc">その日のお身体の状態やお悩みに合わせて、施術内容をオーダーメイドでカスタマイズ。コースも時間もすべてあなた好みに組み合わせられます。全メニューからお好みでチョイスしてください。</p>
+        <div class="mcard-tags">
+          <span class="mcard-tag">ボディ整体</span>
+          <span class="mcard-tag">アロマリンパ</span>
+          <span class="mcard-tag">小顔フェイシャル</span>
+          <span class="mcard-tag">足裏</span>
+          <span class="mcard-tag">ヘッド</span>
+          <span class="mcard-tag">ハンド</span>
+          <span class="mcard-tag">よもぎ蒸し</span>
+          <span class="mcard-tag">かっさ</span>
+          <span class="mcard-tag">カッピング</span>
+          <span class="mcard-tag">ソルト</span>
+        </div>
+        <span class="mcard-price">120 min <small>/ 組み合わせ自由</small></span>
+        <span class="mcard-first">男女OK・何度でも</span>
+      </div>
+
+      <!-- 09 花嫁必見 -->
+      <div class="mcard fade d3">
+        <span class="mcard-badge" style="background:var(--rose)">プレミアム</span>
+        <div class="mcard-num">09</div>
+        <p class="mcard-name">わがまま叶えます！スペシャルコース<br>＋ プレミアムリンパボーラー</p>
+        <div class="mcard-effects">
+          <span class="effect-tag">たるみに</span>
+          <span class="effect-tag">ほうれい線に</span>
+          <span class="effect-tag">特別なご褒美に</span>
+        </div>
+        <p class="mcard-desc">コースも時間も自由に組み合わせられるスペシャルコースに、プレミアムリンパボーラーを加えた最上位コース。たるみ・ほうれい線が気になる方に特におすすめ。毛穴ケア・オイル・痩身ブラシなど全身をお好みにカスタマイズしながら、リンパボーラーで引き上げ効果をさらに高めます。</p>
+        <span class="mcard-price">¥17,000 <small>/ 150 min</small></span>
+        <span class="mcard-first">通常 ¥22,000 → 特別価格 ／ 男女OK</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── OWNER ── -->
+<section class="section owner-sec" id="owner">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-label fade">オーナー</span>
+      <div class="sec-rule fade d1"><span>◆</span></div>
+      <h2 class="sec-title fade d2">オーナーについて</h2>
+    </div>
+    <div class="owner-grid">
+      <div class="owner-photo fade">
+        <img src="オーナー.jpg" alt="オーナー">
+      </div>
+      <div class="owner-text">
+        <span class="owner-label fade">Owner &amp; Therapist</span>
+        <h3 class="owner-title fade d1">オーナーセラピスト</h3>
+        <p class="owner-role fade d2">アロマ香房　free &amp; free</p>
+        <p class="fade d3">
+          「おつかれ」に寄り添い、その日のお悩みに合わせた香りをブレンドします。
+          施術はもちろん、アロマオイルのセレクトから丁寧にカウンセリングを行い、
+          お客様一人ひとりの状態に応じた施術方針をご提案します。
+        </p>
+        <p class="fade d3">
+          初めての方も安心してお越しください。あなたの身体の声に耳を傾けながら、
+          一緒に「本当の楽しさ」を取り戻すお手伝いをします。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VOICE ── -->
+<section class="section voice-sec" id="voice">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-label fade">カスタマーボイス</span>
+      <div class="sec-rule fade d1"><span>◆</span></div>
+      <h2 class="sec-title fade d2">お客様の声</h2>
+    </div>
+    <div class="voice-grid">
+
+      <div class="vcard fade d1">
+        <p class="vcard-text">肩凝りと腰痛あったので、重点的にそこをお願いしました。今回も安定してほぼお任せコースでしたが、本当に身体も軽くなり、すっきりしました。フェイシャルでは血流悪すぎたみたいで、仕上がりはワントーン顔色も明るくなりました！身体が怠くなったら行くのではなく定期的に通えるようにしたいです！</p>
+        <div class="vcard-meta">
+          <span class="vcard-stars">★★★★★</span>
+          <span class="vcard-who">Y さん・30代前半・会社員</span>
+        </div>
+        <span class="vcard-menu">わがまま叶えます 120分スペシャルコース</span>
+      </div>
+
+      <div class="vcard fade d2">
+        <p class="vcard-text">いつもお任せでお願いしていますが、凝っているところ、張っているところ、的確にほぐしてくれるので、本当に助かります！気づくと爆睡もいつものパターン。いびきかいて寝てばかりですみません…（笑）</p>
+        <div class="vcard-meta">
+          <span class="vcard-stars">★★★★★</span>
+          <span class="vcard-who">E さん・50代・会社員</span>
+        </div>
+        <span class="vcard-menu">わがまま叶えます 120分スペシャルコース</span>
+      </div>
+
+      <div class="vcard fade d3">
+        <p class="vcard-text">強張ることが通常の状態になろうとしている身体をすっかりしっかりほぐしていただきました。いつも、私の希望と身体の状態とで施術方針を決めてみっちり施術、普段できることなどのアドバイスもしていただけるので、自分の身体を知ることができる時間にもなり感謝しております！</p>
+        <div class="vcard-meta">
+          <span class="vcard-stars">★★★★★</span>
+          <span class="vcard-who">Y さん・40代・女性</span>
+        </div>
+        <span class="vcard-menu">目・肩・首の疲れにフェイシャル＋頭皮マッサージ 50分</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="section faq-sec" id="faq">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-label fade">よくあるご質問</span>
+      <div class="sec-rule fade d1"><span>◆</span></div>
+      <h2 class="sec-title fade d2">よくあるご質問</h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item fade">
+        <div class="faq-q"><span class="faq-q-mark">Q</span><span>初めてでも大丈夫ですか？</span></div>
+        <div class="faq-a"><span class="faq-a-mark">A</span><p>もちろんです。初回はカウンセリングから始まりますので、気になることは何でもお気軽にご相談ください。お体の状態やご希望に合わせて施術内容をご提案します。</p></div>
+      </div>
+
+      <div class="faq-item fade">
+        <div class="faq-q"><span class="faq-q-mark">Q</span><span>服装はどうすればいいですか？</span></div>
+        <div class="faq-a"><span class="faq-a-mark">A</span><p>施術用のお着替えをご用意しています。いつもの服装でお越しいただいて問題ありません。なお、小顔フェイシャルをご希望の場合はメイクを落としての施術となりますので、アフター用のスキンケア・メイク道具をお持ちいただくと安心です。</p></div>
+      </div>
+
+      <div class="faq-item fade">
+        <div class="faq-q"><span class="faq-q-mark">Q</span><span>支払い方法は何がありますか？</span></div>
+        <div class="faq-a"><span class="faq-a-mark">A</span><p>現金・各種クレジットカード・PayPay・Suica に対応しています。</p></div>
+      </div>
+
+      <div class="faq-item fade">
+        <div class="faq-q"><span class="faq-q-mark">Q</span><span>駐車場はありますか？</span></div>
+        <div class="faq-a"><span class="faq-a-mark">A</span><p>専用駐車場はございませんが、近隣にコインパーキングがあります。電車の場合はJR大井町駅西口より徒歩4分、東急下神明駅より徒歩7分です。</p></div>
+      </div>
+
+      <div class="faq-item fade">
+        <div class="faq-q"><span class="faq-q-mark">Q</span><span>アレルギーがあっても大丈夫ですか？</span></div>
+        <div class="faq-a"><span class="faq-a-mark">A</span><p>カウンセリング時にアレルギーをお伝えください。アロマオイルのブレンドを調整し、安心して施術を受けていただけるよう対応します。</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── RESERVE ── -->
+<section class="reserve-sec" id="reserve">
+  <span class="sec-label fade">ご予約</span>
+  <div class="sec-rule fade d1" style="color:rgba(255,255,255,0.3)">
+    <span style="color:rgba(255,255,255,0.5)">◆</span>
+  </div>
+  <h2 class="sec-title fade d2" style="color:#fff">ご予約・お問い合わせ</h2>
+  <p class="sec-lead fade d3" style="color:rgba(255,255,255,0.7)">お電話・ホットペッパービューティーからお気軽にどうぞ</p>
+  <div class="reserve-btns">
+    <div class="fade d1" style="text-align:center">
+      <a href="tel:0364297463" class="reserve-btn-tel">📞 お電話でのご予約</a>
+      <span class="reserve-tel-num">03-6429-7463</span>
+      <span class="reserve-tel-note">電話受付 12:00〜20:00 ／ ※ご予約・ご来店は20:00まで</span>
+    </div>
+    <a href="https://beauty.hotpepper.jp/kr/slnH000255250/" target="_blank" class="reserve-btn-hotpepper fade d2">📅 ホットペッパービューティーで予約（24時間受付）</a>
+  </div>
+</section>
+
+<!-- ── INFO ── -->
+<section class="section info-sec" id="info">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <span class="sec-label fade">アクセス ＆ インフォ</span>
+      <div class="sec-rule fade d1"><span>◆</span></div>
+      <h2 class="sec-title fade d2">店舗情報・アクセス</h2>
+    </div>
+    <div class="info-grid">
+      <div>
+        <div class="info-block fade">
+          <h3>Address</h3>
+          <address>
+            〒140-0014<br>
+            東京都品川区大井1-15-3<br>
+            マルトミビル 5F<br><br>
+            JR「大井町」西口 徒歩4分<br>
+            東急「下神明」徒歩7分
+          </address>
+        </div>
+        <div class="info-block fade d1">
+          <h3>Hours &amp; Contact</h3>
+          <table class="info-table">
+            <tr>
+              <td>営業時間</td>
+              <td>12:00 〜 22:00<br><small style="color:var(--sumi-light)">※ ご予約・ご来店は20:00まで</small></td>
+            </tr>
+            <tr>
+              <td>定休日</td>
+              <td>年中無休</td>
+            </tr>
+            <tr>
+              <td>電話</td>
+              <td><a href="tel:0364297463">03-6429-7463</a><br><small style="color:var(--sumi-light)">電話受付 12:00〜20:00</small></td>
+            </tr>
+            <tr>
+              <td>支払い</td>
+              <td>現金・カード・PayPay・Suica</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="map-ph fade d2">
+        <div class="map-icon">📍</div>
+        <span>品川区大井 マルトミビル 5F</span>
+        <small style="font-size:0.7rem;color:var(--sumi-light)">Google マップ（Wix 移行後に埋め込み予定）</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">アロマ香房　free &amp; free</div>
+  <ul class="footer-nav">
+    <li><a href="#concept">コンセプト</a></li>
+    <li><a href="#service">施術アイテム</a></li>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#owner">オーナー</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+    <li><a href="#info">アクセス</a></li>
+  </ul>
+  <p class="footer-copy">© 2024 アロマ香房 free &amp; free. All rights reserved.</p>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
