@@ -502,13 +502,6 @@
     .info-table tr { border-bottom: 1px solid var(--border); }
     .info-table td { padding: 13px 0; font-size: 0.84rem; }
     .info-table td:first-child { color: var(--sumi-light); width: 88px; font-size: 0.74rem; letter-spacing: 0.1em; }
-    .map-ph {
-      height: 280px; background: #e4dfd6; border-radius: 2px;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 10px;
-      color: var(--sumi-light); font-size: 0.8rem; letter-spacing: 0.1em;
-    }
-    .map-ph .map-icon { font-size: 2rem; }
 
     /* ── FOOTER ── */
     footer {
@@ -1160,10 +1153,14 @@
           </table>
         </div>
       </div>
-      <div class="map-ph fade d2">
-        <div class="map-icon">📍</div>
-        <span>品川区大井 マルトミビル 5F</span>
-        <small style="font-size:0.7rem;color:var(--sumi-light)">Google マップ（Wix 移行後に埋め込み予定）</small>
+      <div class="fade d2" style="width:100%;height:280px;border-radius:2px;overflow:hidden;">
+        <iframe
+          src="https://maps.google.com/maps?q=東京都品川区大井1-15-3+マルトミビル&output=embed&z=17&hl=ja"
+          width="100%" height="280" style="border:0;display:block;"
+          allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="アロマ香房 free&amp;free アクセスマップ">
+        </iframe>
       </div>
     </div>
   </div>
